@@ -16,4 +16,25 @@ fun main() {
         println("j2: $j")
     }
 
+    exploreWhile()
+    exploreDoWhile()
+
+}
+
+fun exploreDoWhile() {
+    var x = 1;
+    do {
+        println("do while loop var: $x")
+        x++;
+    } while (x < 5)
+
+}
+
+fun exploreWhile() {
+
+    var x = 1
+    while (x < 5) {
+        println("while loop var: $x")
+        x++
+    }
 }
