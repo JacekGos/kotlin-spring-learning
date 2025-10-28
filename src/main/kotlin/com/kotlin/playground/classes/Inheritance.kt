@@ -21,6 +21,12 @@ class Student(name: String) : User(name) {
             return field
         }
 
+    companion object {
+
+        const val noOfEnrolledCourses = 10
+        fun country() = "PL"
+    }
+
     override fun login() {
         println("Inside Student Login")
         super.login()
@@ -41,6 +47,10 @@ fun main() {
     student.login();
     student.isLoggedIn = true;
     println("Student isLoggedIn ${student.isLoggedIn}")
+
+    println("Student country ${Student.country()}")
+    println("Student noOfEnrolledCourses ${Student.noOfEnrolledCourses}")
+
     val instructor = Instructor("Instructor")
     println("name is ${instructor.name}")
     println("Instructor isLoggedIn ${instructor.isLoggedIn}")
