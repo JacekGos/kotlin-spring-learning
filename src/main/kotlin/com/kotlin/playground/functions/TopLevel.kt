@@ -10,4 +10,8 @@ fun topLevelFunction(): Int {
     return (0..100).random();
 }
 
+fun hujWbijamWhejterow() : Unit {
+
+}
+
 const val courseName = "Kotlin programming"
