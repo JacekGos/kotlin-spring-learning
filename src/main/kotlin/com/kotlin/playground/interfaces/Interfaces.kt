@@ -6,6 +6,26 @@ interface Repository {
     fun getAll() : Any
 }
 
+interface A {
+    fun doSmth() {
+        println("A doSmth")
+    }
+}
+
+interface B {
+    fun doSmth() {
+        println("B doSmth")
+    }
+}
+
+class AB : A, B {
+    override fun doSmth() {
+        super<A>.doSmth()
+        super<B>.doSmth()
+        println("AB doSmth")
+    }
+}
+
 interface CourseRepository {
 
     fun getById(id: Int) : Course
@@ -44,17 +64,18 @@ class NoSqlCourseRepository : CourseRepository {
 
 
 fun main() {
-    val repository = SqlCourseRepository()
-    val course = repository.getById(2)
-    println(course)
-    course.name = "New name"
-    println("Saving id: ${repository.save(course)}")
+//    val repository = SqlCourseRepository()
+//    val course = repository.getById(2)
+//    println(course)
+//    course.name = "New name"
+//    println("Saving id: ${repository.save(course)}")
+//
+//    val noSqlRepository = NoSqlCourseRepository()
+//    val course2 = noSqlRepository.getById(3)
+//    println(course2)
+//    course2.name = "New name for noSql"
+//    println("Saving id: ${noSqlRepository.save(course2)}")
 
-    val noSqlRepository = NoSqlCourseRepository()
-    val course2 = noSqlRepository.getById(3)
-    println(course2)
-    course2.name = "New name for noSql"
-    println("Saving id: ${noSqlRepository.save(course2)}")
-
-
+    val ab : AB = AB()
+    ab.doSmth()
 }
