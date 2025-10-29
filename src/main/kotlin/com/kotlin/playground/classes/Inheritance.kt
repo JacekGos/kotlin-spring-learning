@@ -17,7 +17,7 @@ open class User(
     }
 }
 
-class Student(name: String) : User(name), CourseRepository {
+class Student(name: String) : User(name) {
     override var isLoggedIn: Boolean = false
         get() {
             println("Getter isLoggedIn inside Student")
@@ -33,10 +33,6 @@ class Student(name: String) : User(name), CourseRepository {
     override fun login() {
         println("Inside Student Login")
         super.login()
-    }
-
-    override fun getById(id: Int): Course {
-        TODO("Not yet implemented")
     }
 }
 

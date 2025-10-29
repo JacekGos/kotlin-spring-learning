@@ -3,7 +3,7 @@ package com.kotlin.playground.interfaces
 import com.kotlin.playground.classes.Course
 
 interface Repository {
-    fun getAll() : Any
+    fun getAll(): Any
 }
 
 interface A {
@@ -28,8 +28,9 @@ class AB : A, B {
 
 interface CourseRepository {
 
-    fun getById(id: Int) : Course
-    fun save(course: Course) : Int {
+    val isCoursePersisted: Boolean
+    fun getById(id: Int): Course
+    fun save(course: Course): Int {
         println("Saving in CourseRepository")
         println("Save course: $course")
         return course.id
@@ -37,7 +38,8 @@ interface CourseRepository {
 }
 
 class SqlCourseRepository : CourseRepository, Repository {
-
+    override var isCoursePersisted: Boolean = false
+        get() = field
     override fun getById(id: Int): Course {
         val course = Course(id, "Kotlin tutorial", "Someone")
         return course;
@@ -47,11 +49,14 @@ class SqlCourseRepository : CourseRepository, Repository {
         TODO("Not yet implemented")
     }
 
-
+    override fun save(course: Course): Int {
+        isCoursePersisted = true
+        return super.save(course)
+    }
 }
 
 class NoSqlCourseRepository : CourseRepository {
-
+    override var isCoursePersisted: Boolean = false
     override fun getById(id: Int): Course {
         return Course(id, "Nosql course", "Ja")
     }
@@ -64,11 +69,14 @@ class NoSqlCourseRepository : CourseRepository {
 
 
 fun main() {
-//    val repository = SqlCourseRepository()
-//    val course = repository.getById(2)
-//    println(course)
-//    course.name = "New name"
-//    println("Saving id: ${repository.save(course)}")
+
+    val repository = SqlCourseRepository()
+    val course = repository.getById(2)
+    println(course)
+    println(repository.isCoursePersisted)
+    course.name = "New name"
+    println("Saving id: ${repository.save(course)}")
+    println(repository.isCoursePersisted)
 //
 //    val noSqlRepository = NoSqlCourseRepository()
 //    val course2 = noSqlRepository.getById(3)
@@ -76,6 +84,6 @@ fun main() {
 //    course2.name = "New name for noSql"
 //    println("Saving id: ${noSqlRepository.save(course2)}")
 
-    val ab : AB = AB()
+    val ab: AB = AB()
     ab.doSmth()
 }
