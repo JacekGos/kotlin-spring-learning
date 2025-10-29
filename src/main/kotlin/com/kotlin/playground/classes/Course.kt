@@ -2,17 +2,15 @@ package com.kotlin.playground.classes
 
 data class Course(
     val id: Int,
-    val name: String,
+    var name: String,
     val author: String
 ) {
-
 }
 
 
 fun main() {
     val course = Course(1, "Kotlin tutorial", "Someone")
 
-//    println(course)
 
     val course1 = Course(1, "Kotlin tutorial", "Someone")
 

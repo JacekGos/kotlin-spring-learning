@@ -1,5 +1,8 @@
 package com.kotlin.playground.classes
 
+import com.kotlin.playground.interfaces.CourseRepository
+import com.kotlin.playground.interfaces.SqlCourseRepository
+
 open class User(
     val name: String
 ) {
@@ -14,7 +17,7 @@ open class User(
     }
 }
 
-class Student(name: String) : User(name) {
+class Student(name: String) : User(name), CourseRepository {
     override var isLoggedIn: Boolean = false
         get() {
             println("Getter isLoggedIn inside Student")
@@ -30,6 +33,10 @@ class Student(name: String) : User(name) {
     override fun login() {
         println("Inside Student Login")
         super.login()
+    }
+
+    override fun getById(id: Int): Course {
+        TODO("Not yet implemented")
     }
 }
 
