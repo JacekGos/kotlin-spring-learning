@@ -52,7 +52,8 @@ fun exploreHashMap() {
     val contains = nameById.containsKey("abc")
     println("contains: $contains")
 
-    val filteredMap = nameById.filterKeys { it.length > 5 }
+    val filteredMap = nameById.filterKeys { it.length < 6 }
+//        .map { it.key.uppercase(Locale.getDefault()) }
         .map { it.key.uppercase(Locale.getDefault()) }
     println("filteredMap: $filteredMap")
 
