@@ -7,16 +7,29 @@ import com.kotlin.playground.dataset.courseList
 fun main() {
     val courseList = courseList()
 
-    val devPredicate = {course: Course ->
+    val devPredicate = { course: Course ->
         course.category == CourseCategory.DEVELOPEMENT
     }
 
-    val designPredicate = {course: Course ->
+    val designPredicate = { course: Course ->
         course.category == CourseCategory.DESIGN
     }
 
 //    exploreFilter(courseList, devPredicate)
-    exploreFilter(courseList, designPredicate)
+//    exploreFilter(courseList, designPredicate)
+
+    exploreMap(courseList, devPredicate)
+}
+
+fun exploreMap(courseList: MutableList<Course>, predicate: (Course) -> Boolean) {
+
+    val courses = courseList
+//        .map { it.name }
+        .filter(predicate)
+        .map { "${it.name} - ${it.category}" }
+        .forEach { println(it) }
+
+    println("Map courses: $courses")
 }
 
 fun exploreFilter(courseList: MutableList<Course>, predicate: (Course) -> Boolean) {
@@ -24,6 +37,6 @@ fun exploreFilter(courseList: MutableList<Course>, predicate: (Course) -> Boolea
     val developmentCourses = courseList
 //        .filter { it.category == CourseCategory.DEVELOPEMENT }
 //        .filter(predicate)
-        .filter{ predicate.invoke(it)}
+        .filter { predicate.invoke(it) }
         .forEach { println("Dev course: $it") }
 }
