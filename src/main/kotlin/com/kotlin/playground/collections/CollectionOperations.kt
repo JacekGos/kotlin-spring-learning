@@ -4,6 +4,7 @@ import com.kotlin.playground.dataset.Course
 import com.kotlin.playground.dataset.CourseCategory
 import com.kotlin.playground.dataset.KAFKA
 import com.kotlin.playground.dataset.courseList
+import java.util.*
 
 fun main() {
     val courseList = courseList()
@@ -21,18 +22,44 @@ fun main() {
         outerList.map { it.toDouble() }
 
     }
-    println("mapResult $mapResult")
+//    println("mapResult $mapResult")
 
-    val flatMapResult = list.flatMap { outerList ->
-        outerList.map { it.toDouble() }
-    }
-    println("flatMapResult $flatMapResult")
+//    val flatMapResult = list.flatMap { outerList ->
+//        outerList.map { it.toDouble() }
+//    }
+//    println("flatMapResult $flatMapResult")
 
 //    exploreFilter(courseList, devPredicate)
 //    exploreFilter(courseList, designPredicate)
 //    exploreMap(courseList, devPredicate)
-    val courses = exploreFlatMap(courseList, KAFKA)
-    println("Courses $courses")
+//    val courses = exploreFlatMap(courseList, KAFKA)
+//    println("Courses $courses")
+
+    exploreHashMap()
+}
+
+fun exploreHashMap() {
+
+    val nameById = mutableMapOf("Jacek" to 1, "Szymon" to 2, "Dominik" to 3)
+    nameById.forEach { (k, v) ->
+        println("Key: $k value: $v")
+    }
+
+//    val value = nameById["Jacek"]
+    val value = nameById.getOrElse("Jacek2") {"DUPSKO"}
+    println("value: $value")
+
+    val contains = nameById.containsKey("abc")
+    println("contains: $contains")
+
+    val filteredMap = nameById.filterKeys { it.length > 5 }
+        .map { it.key.uppercase(Locale.getDefault()) }
+    println("filteredMap: $filteredMap")
+
+    val maxId = nameById.maxByOrNull { it.value }
+    println("maxId: $maxId")
+
+
 }
 
 fun exploreFlatMap(courseList: MutableList<Course>, topic: String): List<String> {
